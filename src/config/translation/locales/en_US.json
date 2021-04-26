@@ -1,0 +1,11 @@
+{
+  "created_at": "Created At",
+  "lecture_name": "Lecture Name",
+  "lecture_class": "Lecture Class",
+  "actions": "Actions",
+  "attendance_sheet": "Download Attendance Sheet",
+  "add_new_lecture": "Add New Lecture",
+  "show_qr": "Show Qr Code",
+  "sidebar.lectures": "Lectures",
+  "topbar.logout": "Logout"
+}
