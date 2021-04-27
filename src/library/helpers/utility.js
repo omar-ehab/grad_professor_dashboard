@@ -1,12 +1,12 @@
 import { Map } from 'immutable';
 
 export function clearToken() {
-  localStorage.removeItem('id_token');
+  localStorage.removeItem('doctor_id_token');
 }
 
 export function getToken() {
   try {
-    const idToken = localStorage.getItem('id_token');
+    const idToken = localStorage.getItem('doctor_id_token');
     return new Map({ idToken });
   } catch (err) {
     clearToken();

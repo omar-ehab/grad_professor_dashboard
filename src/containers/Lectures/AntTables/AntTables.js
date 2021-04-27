@@ -34,8 +34,7 @@ export default function AntTable() {
   }
 
   const onRecordChange = (e, key) => {
-    if (key) lecture[key] = e.target.value;
-    dispatch(lectureActions.update(lecture));
+    dispatch(lectureActions.update(key, e.target.value));
   }
 
   const closeLectureModal = () => {

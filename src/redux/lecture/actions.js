@@ -5,9 +5,9 @@ const actions = {
   UPDATE_LECTURE_FORM_DATA: DOCUMENT + 'UPDATE_FORM_DATA',
   CLEAR: DOCUMENT + 'CLEAR',
 
-  update: data => ({
+  update: (key, value) => ({
     type: actions.UPDATE_LECTURE_FORM_DATA,
-    payload: data,
+    payload: {key, value},
   }),
 
   clear: () => ({

@@ -4,11 +4,14 @@ const actions = {
   LOGOUT: 'LOGOUT',
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGIN_ERROR: 'LOGIN_ERROR',
+
   checkAuthorization: () => ({ type: actions.CHECK_AUTHORIZATION }),
-  login: (token = false) => ({
+
+  login: (credentials) => ({
     type: actions.LOGIN_REQUEST,
-    payload: { token },
+    payload: credentials
   }),
+
   logout: () => ({
     type: actions.LOGOUT,
   }),

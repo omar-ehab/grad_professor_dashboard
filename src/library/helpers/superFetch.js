@@ -3,7 +3,7 @@ import jwtConfig from '@iso/config/jwt.config';
 const customHeader = () => ({
   'Content-Type': 'application/json',
   Accept: 'application/json',
-  Authorization: 'Bearer ' + localStorage.getItem('id_token') || undefined,
+  Authorization: 'Bearer ' + localStorage.getItem('doctor_id_token') || undefined,
 });
 
 const base = (method, url, data = {}) => {

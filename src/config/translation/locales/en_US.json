@@ -7,5 +7,8 @@
   "add_new_lecture": "Add New Lecture",
   "show_qr": "Show Qr Code",
   "sidebar.lectures": "Lectures",
-  "topbar.logout": "Logout"
+  "topbar.logout": "Logout",
+  "page.signInRememberMe": "Remember Me",
+  "page.signInButton": "Sign In",
+  "page.signInTitle": "Sign In"
 }
