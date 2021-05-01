@@ -6,25 +6,11 @@ import { ShowQrModal, DownloadExcel } from '@iso/components/Tables/HelperCells';
 
 export default function(props) {
 
-  const [state, setState] = React.useState({
-    columns: createcolumns(clone(props.tableInfo.columns)),
-    dataList: props.dataList.getAll(),
-  });
-
-  const { columns, dataList } = state;  
-
-  function onChange(pagination, filters, sorter) {
-    if (sorter && sorter.columnKey && sorter.order) {
-      if (sorter.order === 'ascend') {
-        dataList.getSortAsc(sorter.columnKey);
-      } else {
-        dataList.getSortDesc(sorter.columnKey);
-      }
-      setState(dataList.getAll());
-    }
-  }
+  const columns = createcolumns(clone(props.tableInfo.columns));
+  const dataList = props.dataList;
 
   function createcolumns(columns) {
+
     const showQrColumn = {
       title: <IntlMessages id="show_qr" />,
       dataIndex: 'show_qr',
@@ -42,16 +28,16 @@ export default function(props) {
     };
     columns.push(showQrColumn);
     columns.push(downloadExcelColumn);
+
     return columns;
   }
   
   return (
     <TableWrapper
       columns={columns}
-      onChange={onChange}
       dataSource={dataList}
-      pagination={{ pageSize: 5 }}
-      className="isoSortingTable"
+      pagination={{ pageSize: 10 }}
+      className="isoSimpleTable"
     />
   );
 }

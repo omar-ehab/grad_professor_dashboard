@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import LayoutContentWrapper from '@iso/components/utility/layoutWrapper';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '@iso/components/Feedback/Modal';
@@ -29,10 +29,7 @@ const margin = {
 const dataList = new fakeData(10);
 
 export default function AntTable() {
-  function renderTable(tableInfo) {
-    const Component = TableViews.SortView;
-    return <Component tableInfo={tableInfo} dataList={dataList} />;
-  }
+
 
   const onRecordChange = (e, key) => {
     dispatch(lectureActions.update(key, e.target.value));
@@ -49,13 +46,23 @@ export default function AntTable() {
   
   const dispatch = useDispatch();
 
-  const { qrModal, lectureModal, lecture } = useSelector(state => {
+  const { qrModal, lectureModal, lecture, lectures } = useSelector(state => {
     return {
       qrModal: state.qrModal,
       lectureModal: state.lectureModal,
-      lecture: state.lecture
+      lecture: state.lecture,
+      lectures: state.lecture.lectures
     }
   });
+
+  useEffect(() => {
+    dispatch(lectureActions.getLectures());
+  }, []);
+
+  function renderTable(tableInfo, data) {
+    const Component = TableViews.SortView;
+    return <Component tableInfo={tableInfo} dataList={data} />;
+  }
 
   const qrImageStyle = {
     width: "100%",
@@ -116,7 +123,7 @@ export default function AntTable() {
           {<IntlMessages id="add_new_lecture" />}
       </Button>
       <TableDemoStyle className="isoLayoutContent">
-        {renderTable(tableInfo)}
+        {renderTable(tableInfo, lectures)}
       </TableDemoStyle>
     </LayoutContentWrapper>
   );

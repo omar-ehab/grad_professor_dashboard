@@ -82,12 +82,14 @@ const tableData = JSON.parse(
 
 const sortOption = {};
 class fakeData {
+
   constructor(size) {
     this.size = size || 2000;
     this.datas = [];
     this.sortKey = null;
     this.sortDir = null;
   }
+
   dataModel(index) {
     return tableData[index];
   }
@@ -112,6 +114,7 @@ class fakeData {
   getSize() {
     return this.size;
   }
+  
   getSortAsc(sortKey) {
     sortOption.sortKey = sortKey;
     sortOption.sortDir = 'ASC';

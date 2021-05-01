@@ -1,5 +1,4 @@
 import React from 'react';
-import clone from 'clone';
 import IntlMessages from '@iso/components/utility/intlMessages';
 import { TextCell } from '@iso/components/Tables/HelperCells';
 
@@ -29,15 +28,10 @@ const columns = [
     render: object => renderCell(object, 'created_at'),
   }
 ];
-const sortColumns = [
-  { ...columns[0], sorter: true },
-  { ...columns[1], sorter: true },
-  { ...columns[2], sorter: true },
-  { ...columns[3], sorter: false },
-];
+
 const tableInfo = {
     title: 'Lectures',
     value: 'sort',
-    columns: clone(sortColumns),
+    columns
   };
 export { columns, tableInfo };
