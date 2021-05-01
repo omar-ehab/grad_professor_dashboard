@@ -14,6 +14,7 @@ import { direction } from '@iso/lib/helpers/rtl';
 import qrModalActions from '@iso/redux/qrModal/actions';
 import lectureModalActions from '@iso/redux/lectureModal/actions';
 import lectureActions from '@iso/redux/lecture/actions';
+import { Alert } from 'antd';
 
 import {
   Fieldset,
@@ -43,6 +44,8 @@ export default function AntTable() {
   }
 
   const openLectureModal = () => dispatch(lectureModalActions.openModal());
+
+  const submitNewLecture = () => dispatch(lectureActions.insertLecture());
   
   const dispatch = useDispatch();
 
@@ -81,9 +84,10 @@ export default function AntTable() {
             onCancel={closeLectureModal}
             width={780}
             okText={'Add New Lecture'}
-            onOk={() => {console.log("lecture added")}}
+            onOk={submitNewLecture}
       >
         <Form>
+              { lecture?.errors?.context?.key === "doctor_id" ? <Alert message="Something Went Wrong Please Logout and Login again" type="error" style={{marginBottom: 10}}/> : "" }
               <Fieldset>
                 <Label>Lecture Name</Label>
                 <Input
@@ -92,6 +96,7 @@ export default function AntTable() {
                   value={lecture.name}
                   onChange={e => onRecordChange(e, 'name')}
                 />
+                { lecture?.errors?.context?.key === "name" ? <Alert message="Please Enter Lecture Name" type="error" style={{marginTop: 10}}/> : "" }
               </Fieldset>
 
               <Fieldset>
@@ -102,6 +107,7 @@ export default function AntTable() {
                   value={lecture.class_name}
                   onChange={e => onRecordChange(e, 'class_name')}
                 />
+                { lecture?.errors?.context?.key === "class" ? <Alert message="Please Enter Class Name" type="error" style={{marginTop: 10}}/> : "" }
               </Fieldset>
             </Form>
 

@@ -7,7 +7,7 @@ class AuthHelper {
     if (!userInfo.email || !userInfo.password) {
       return { error: 'please fill in the input' };
     }
-    return await SuperFetch.post('doctor/login', userInfo).then(response => {
+    return await SuperFetch.post('auth/doctor/login', userInfo).then(response => {
         return this.checkExpirity(response);
     }).catch(err => err);
   };

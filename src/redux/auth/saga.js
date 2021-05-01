@@ -13,7 +13,8 @@ export function* loginRequest() {
     if (data.token) {
       yield put({
         type: actions.LOGIN_SUCCESS,
-        token: data.token
+        token: data.token,
+        doctor_id: data.id
       });
     } else {
       console.clear()
@@ -25,6 +26,7 @@ export function* loginRequest() {
 export function* loginSuccess() {
   yield takeEvery(actions.LOGIN_SUCCESS, function*(payload) {
     yield localStorage.setItem('doctor_id_token', payload.token);
+    yield localStorage.setItem('doctor_id', payload.doctor_id);
   });
 }
 
