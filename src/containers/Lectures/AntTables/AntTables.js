@@ -5,7 +5,7 @@ import Modal from '@iso/components/Feedback/Modal';
 import Input from '@iso/components/uielements/input';
 import { Row, Col } from 'antd';
 import TableDemoStyle from './Demo.styles';
-import fakeData from '../data';
+// import fakeData from '../data';
 import { tableInfo } from './configs';
 import * as TableViews from './TableViews/TableViews';
 import { Button } from 'antd';
@@ -26,7 +26,7 @@ const margin = {
   margin: direction === 'rtl' ? '0 0 8px 8px' : '0 8px 8px 0',
 };
 
-const dataList = new fakeData(10);
+// const dataList = new fakeData(10);
 
 export default function AntTable() {
 
@@ -95,6 +95,7 @@ export default function AntTable() {
       >
         <Form>
               { lecture?.errors?.context?.key === "doctor_id" ? <Alert message="Something Went Wrong Please Logout and Login again" type="error" style={{marginBottom: 10}}/> : "" }
+              { lecture?.errors?.message !== undefined ? <Alert message={lecture.errors.message} type="error" style={{marginBottom: 10}}/> : "" }
               <Fieldset>
                 <Label>Lecture Name</Label>
                 <Input
@@ -119,9 +120,20 @@ export default function AntTable() {
             </Form>
 
       </Modal>
-      <Button type="primary" style={margin} onClick={openLectureModal}>
-          {<IntlMessages id="add_new_lecture" />}
-      </Button>
+      
+      <Row>
+        { lecture.lectures_error.length ?
+          <Col span={24}>
+            <Alert message={lecture.lectures_error} type="error" style={{marginBottom: 10}}/>
+          </Col>
+        : "" }
+        <Col span={24}>
+          <Button type="primary" style={margin} onClick={openLectureModal}>
+            {<IntlMessages id="add_new_lecture" />}
+          </Button>
+        </Col>
+      </Row>
+      
       <TableDemoStyle className="isoLayoutContent">
         {renderTable(tableInfo, lectures)}
       </TableDemoStyle>
@@ -129,4 +141,4 @@ export default function AntTable() {
   );
 }
 
-export { TableViews, tableInfo, dataList };
+export { TableViews, tableInfo };

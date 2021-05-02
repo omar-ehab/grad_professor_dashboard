@@ -37,7 +37,10 @@ export function* updateLectureRequest() {
       }
     
     } catch(err) {
-      console.error(err);
+      yield put({
+        type: actions.GET_ALL_LECTURES_ERROR,
+        payload: {message: "Please Connect to Internet"}
+      });
     }
   });
 
@@ -52,19 +55,25 @@ export function* updateLectureRequest() {
     }
     try{
       const res = yield SuperFetch.post('lectures', payload);
+      console.log()
       if(res.success === true){
         yield put({ type: lectureModalActions.HIDE_LECTURE_MODAL });
         yield put({
           type: actions.INSERT_LECTURE_TO_LIST,
           payload: { lecture: res.lecture }
         });
-      } else {
+      } else if(res.error.details) {
         yield put({
           type: actions.INSERT_ERROR,
           payload: res.error.details[0]
         });
+      } else if(res.error === "Failed to fetch") {
+        console.log("IN IF");
+        yield put({
+          type: actions.INSERT_ERROR,
+          payload: {message: "Please Connect to Internet"}
+        });
       }
-    
     } catch(err) {
       console.error(err);
     }

@@ -5,7 +5,8 @@ const initState = {
   name: "",
   class_name: "",
   lectures: [],
-  errors: {}
+  errors: {},
+  lectures_error: ""
 };
 
  
@@ -36,6 +37,11 @@ export default function reducer(state = initState, { type, payload }) {
         ...state,
         lectures: lecs
       };
+    case actions.GET_ALL_LECTURES_ERROR:
+      return {
+        ...state,
+        lectures_error: payload.message
+      };
     case actions.INSERT_LECTURE_TO_LIST:
       const lec = {
           id: payload.lecture._id,
@@ -50,14 +56,16 @@ export default function reducer(state = initState, { type, payload }) {
         lectures: [lec, ...state.lectures],
         name: "",
         class_name: "",
-        errors: {}
+        errors: {},
+        lectures_error: ""
       };
     case actions.CLEAR:
       return {
         lectures: [...state.lectures],
         name: "",
         class_name: "",
-        errors: {}
+        errors: {},
+        lectures_error: state.lectures_error
       };
     default:
       return state;

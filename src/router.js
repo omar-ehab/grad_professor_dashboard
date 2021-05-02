@@ -57,7 +57,7 @@ export default function Routes() {
                 <route.component />
               </Route>
             ))}
-            <PrivateRoute path="/professor/dashboard">
+            <PrivateRoute path="/professor/dashboard/">
               <Dashboard />
             </PrivateRoute>
           </Switch>

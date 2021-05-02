@@ -14,7 +14,7 @@ const base = (method, url, data = {}) => {
   })
     .then(response => response.json())
     .then(res => res)
-    .catch(error => ({ error: 'Server Error' }));
+    .catch(error => ({ error: error.message }));
 };
 
 const SuperFetch = {};
