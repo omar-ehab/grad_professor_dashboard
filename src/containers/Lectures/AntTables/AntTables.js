@@ -57,7 +57,7 @@ export default function AntTable() {
 
   useEffect(() => {
     dispatch(lectureActions.getLectures());
-  }, []);
+  }, [dispatch]);
 
   function renderTable(tableInfo, data) {
     const Component = TableViews.SortView;
