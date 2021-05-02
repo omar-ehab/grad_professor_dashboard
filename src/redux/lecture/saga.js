@@ -11,10 +11,8 @@ import SuperFetch from '../../library/helpers/superFetch';
 export function* updateLectureRequest() {
 
   yield takeEvery('LECTURE_GET_ALL_REQUEST', function*() {
-    // const doctor_id = yield getToken().get("doctorId");
-    const doctor_id = 1;
+    const doctor_id = yield getToken().get("doctorId");
     try {
-      // const res = yield SuperFetch.get(`lectures/${doctor_id}`, {});
       const res = yield fetch(`${jwtConfig.fetchUrl}lectures/${doctor_id}`, {
         method: 'get',
         headers: {
@@ -45,8 +43,7 @@ export function* updateLectureRequest() {
   });
 
   yield takeEvery('LECTURE_INSERT_REQUEST', function*() {
-    // const doctor_id = yield getToken().get("doctorId");
-    const doctor_id = 1;
+    const doctor_id = yield getToken().get("doctorId");
     const { lecture } = yield select();
     const payload = {
       name: lecture.name,

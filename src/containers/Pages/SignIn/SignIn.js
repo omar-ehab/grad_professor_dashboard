@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Input from '@iso/components/uielements/input';
-import Checkbox from '@iso/components/uielements/checkbox';
 import Button from '@iso/components/uielements/button';
 import IntlMessages from '@iso/components/utility/intlMessages';
 import authAction from '@iso/redux/auth/actions';
@@ -22,11 +21,10 @@ export default function SignIn() {
     return {
       isLoggedIn: state.Auth.idToken,
       error_message: state.Auth.error_message
-      
     }
   });
 
-  const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
+  const [redirectToReferrer, setRedirectToReferrer] = useState(false);
   const [credentials, setCredentials] = useState({email: "", password: ""});
 
   React.useEffect(() => {
@@ -54,6 +52,7 @@ export default function SignIn() {
   if (redirectToReferrer) {
     return <Redirect to={from} />;
   }
+
   return (
     <SignInStyleWrapper className="isoSignInPage">
       <div className="isoLoginContentWrapper">
@@ -64,6 +63,7 @@ export default function SignIn() {
             </Link>
           </div>
           <div className="isoSignInForm">
+
             { error_message ? <Alert message={error_message} type="error" style={{marginBottom: 10}}/> : "" }
             
             <form>
@@ -89,9 +89,6 @@ export default function SignIn() {
               </div>
 
               <div className="isoInputWrapper isoLeftRightComponent">
-                <Checkbox>
-                  <IntlMessages id="page.signInRememberMe" />
-                </Checkbox>
                 <Button type="primary" onClick={e => handleLogin(e)}>
                   <IntlMessages id="page.signInButton" />
                 </Button>

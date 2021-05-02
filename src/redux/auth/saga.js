@@ -8,13 +8,14 @@ import actions from './actions';
 const history = createBrowserHistory();
 
 export function* loginRequest() {
+
   yield takeEvery('LOGIN_REQUEST', function*({ payload }) {
     const data = yield call(authHelper.login, payload);
     if (data.token) {
       yield put({
         type: actions.LOGIN_SUCCESS,
         token: data.token,
-        doctor_id: data.id
+        doctorId: data.id
       });
     } else {
       console.clear()
@@ -24,10 +25,14 @@ export function* loginRequest() {
 }
 
 export function* loginSuccess() {
+
   yield takeEvery(actions.LOGIN_SUCCESS, function*(payload) {
-    yield localStorage.setItem('doctor_id_token', payload.token);
-    yield localStorage.setItem('doctor_id', payload.doctor_id);
+    if (typeof window !== 'undefined') {
+      yield localStorage.setItem('doctor_id_token', payload.token);
+      yield localStorage.setItem('doctor_dashboard_id', payload.doctorId);
+    }
   });
+
 }
 
 export function* loginError() {
@@ -43,10 +48,12 @@ export function* logout() {
 export function* checkAuthorization() {
   yield takeEvery(actions.CHECK_AUTHORIZATION, function*() {
     const token = getToken().get('idToken');
-    if (token) {
+    const doctorId = getToken().get('doctorId');
+    if (token && doctorId) {
       yield put({
         type: actions.LOGIN_SUCCESS,
         token,
+        doctorId,
         profile: 'Profile',
       });
     }

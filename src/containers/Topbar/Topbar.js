@@ -9,7 +9,6 @@ const { Header } = Layout;
 const { toggleCollapsed } = appActions;
 
 export default function Topbar() {
-  const [selectedItem, setSelectedItem] = React.useState('');
   const customizedTheme = useSelector(state => state.ThemeSwitcher.topbarTheme);
   const { collapsed, openDrawer } = useSelector(state => state.App);
   const dispatch = useDispatch();
@@ -42,7 +41,7 @@ export default function Topbar() {
         </div>
 
         <ul className="isoRight">
-          <li onClick={() => setSelectedItem('user')} className="isoUser">
+          <li className="isoUser">
             <TopbarUser />
           </li>
         </ul>

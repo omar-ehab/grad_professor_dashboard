@@ -1,12 +1,13 @@
 import actions from './actions';
 
-const initState = { idToken: null, error_message: "" };
+const initState = { idToken: null, doctorId: null, error_message: "" };
 
 export default function authReducer(state = initState, action) {
   switch (action.type) {
     case actions.LOGIN_SUCCESS:
       return {
         idToken: action.token,
+        doctorId: action.doctor_id,
       };
     case actions.LOGIN_ERROR:
       return {
