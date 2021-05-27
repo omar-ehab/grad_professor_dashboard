@@ -14,7 +14,7 @@ const margin = {
 export default function({ lecture_id }) {
   
   const handleDownload = () => {
-    const url = `http://127.0.0.1:8000/lectures/${lecture_id.id}/download`;
+    const url = `http://127.0.0.1:8000/lectures/${lecture_id.lecture_qr_id}/download`;
     axios({
       url,
       method: 'GET',

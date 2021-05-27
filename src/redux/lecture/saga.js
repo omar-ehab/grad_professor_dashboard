@@ -52,7 +52,6 @@ export function* updateLectureRequest() {
     }
     try{
       const res = yield SuperFetch.post('lectures', payload);
-      console.log()
       if(res.success === true){
         yield put({ type: lectureModalActions.HIDE_LECTURE_MODAL });
         yield put({

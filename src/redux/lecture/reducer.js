@@ -27,6 +27,7 @@ export default function reducer(state = initState, { type, payload }) {
         return {
           id: lec._id,
           key: lec._id,
+          lecture_qr_id: lec.lecture_qr_id,
           lecture_name: lec.name,
           lecture_class: lec.class,
           created_at: moment(lec.date).format('YYYY-MM-DD hh:mm a'),
@@ -46,6 +47,7 @@ export default function reducer(state = initState, { type, payload }) {
       const lec = {
           id: payload.lecture._id,
           key: payload.lecture._id,
+          lecture_qr_id: payload.lecture.lecture_qr_id,
           lecture_name: payload.lecture.name,
           lecture_class: payload.lecture.class,
           created_at: moment(payload.lecture.date).format('YYYY-MM-DD hh:mm a'),
